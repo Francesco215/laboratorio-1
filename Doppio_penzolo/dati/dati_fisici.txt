@@ -1,0 +1,22 @@
+MASSA: 474.876 +- 0.001 [g]
+DISTANZA DI CDM DEL CILINDRO DA O: 51.4 +/- 0.1 cm 
+DIAMETRO CILINDRO: 7.15 +/- 0.05 cm
+RAGGIO CILINDRO:: 3.575 +/- 0.025 cm
+MOMENTO DI INTERZIA: 1257637.6 +/- 4926.8 g*cm^2
+LUNGHEZZA VASCHETTE: 25.0 +/- 0.1 cm
+LUNGHEZZA SBARRA: 48.5 +/- 0.1 cm
+CENTRO DI MASSA SBARRA SU O: 24.25 +/- 0.05 cm
+PULSAZIONE ANGOLARE OMEGA(0) MISURATA:
+PULSAZIONE ANGOLARE OMEGA(0) TEORICA:
+
+Correzione d-inerzia: 1/12ML^2 + M*24.35^2 ---> da AGGIUNGERE
+Massa della sbarra: 151.26 g +/- NaN
+
+FORMULA : X(c)M/(x(l)-x(c))         dove x(c) cdm cilindro e x(l) cdm sbarra
+
+____________________________________________________
+
+
+PULSAZIONI ANGOLARI IN FASE: w(f) = 
+PULSAZIONI ANGOLARI IN CONTROFASE: w(c) =
+

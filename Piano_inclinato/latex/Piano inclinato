@@ -1,0 +1,124 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage{graphicx}
+\title{Piano inclinato}
+\author{Francesco Sacco, Francesco Tarantelli e Giovanni Sucameli}
+\date{27 Novembre 2016}
+\begin{document}
+\maketitle
+\section{Scopo dell'esperienza}
+Lo scopo dell'esperienza \`e quello di studiare il moto di una sferetta su di un piano inclinato.
+\section{Cenni teorici}
+Dalle equazioni della dinamica si ricava che l'accelerazione del centro di massa della sfera lungo il piano inclinato vale
+\begin{equation}
+a = \frac{5}{9}g sin(\alpha),
+\end{equation}
+dove $\alpha$ \`e l'angolo di inclinazione della guida. Dalle leggi della cinematica si ricava la legge 
+oraria che descrive il moto del centro di massa (con velocit\`a iniziale nulla e spazio percorso all'istante
+iniziale anch'esso nullo):
+\begin{equation}
+s(t) = \frac{1}{2} a t^2 = \frac{5}{18}g sin(\alpha) t^2
+\end{equation}  
+\begin{figure}[!htb]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{piano}
+\end{center}
+\caption{Sfera che rotola su un piano inclinato}
+\label{figura_di_esempio}
+\end{figure}
+
+\section{Apparato sperimentale e strumenti}
+\subsection{Apparato sperimentale}
+Abbiamo a disposizione una guida con un profilo "a V" di cui è possibile regolare l'angolo di inclinazione attraverso degli appositi supporti
+regolabili. Le due fotocellule vengono disposte a diverse distanze lungo la guida ad altezza tale che al passaggio della pallina si accenda
+la luce rossa che ne indica il passaggio. 
+
+\subsection{Strumenti e materiale a disposizione}
+\begin{itemize}
+\item Un profilo metallico "a V".
+\item Tre sferette di massa diversa.
+\item Calcolatore con programma di acquisizione.
+\item Due traguardi ottici collegati al calcolatore (con una risoluzione di $\ 10^{-6} $ secondi).
+\item Metro a nastro (risoluzione 1 mm).
+\item Calibro ventesimale (risoluzione 0.05 mm )
+\item Livella elettronica (risoluzione $\ 0.01^\circ$ gradi sessagesimali).
+\end{itemize}
+\section {Descrizione delle misure}
+Per prima cosa abbiamo stimato l'angolo di inclinazione del piano. Abbiamo effettuato le misure con la livella 
+elettronica partendo da un estremit\`a e spostandola di circa   30 - 40  cm ad ogni misurazione, poich\`e la sbarra
+presentava delle deformazioni. Abbiamo preso il valor medio delle misure come valore centrale e la semidispersione 
+come incertezza.
+
+Le misure dei tempi sono state effettuate avendo cura di far partire da ferma la sfera e il pi\`u vicino possibile alla 
+fotocellula del primo traguardo ottico ( per far ci\`o abbiamo bloccato la sferetta con una piastrina di plastica che poi 
+abbiamo rimosso velocemente ed accuratamente in direzione perpendicolare alla guida) per ridurre al minimo possibili 
+errori sistematici dovuti alla velocit\`a iniziale.
+Abbiamo raccolto i dati del calcolatore ed effettuato media e deviazione standard della media
+per ottenere rispettivamente valore centrale e incertezza della misura. 
+%Abbiamo anche effettuato una misura indiretta (misurando la lunghezza dei lati del profilo e la loro distanza in vari punti della guida)
+%dell'angolo del profilo metallico "a V". Anche in questo caso abbiamo calcolato media e semidispersione. 
+\\
+Nelle tabelle sottostanti sono raccolte le misure effettuate.
+\subsection{Tempi in funzione della distanza tra le due fotocellule}
+\begin{center}
+\begin{tabular}{ccc}
+\hline  $\ l_1 $ = 115.9 $\pm$ 0.1 cm  & $\ l_2 $ = 69.5 $\pm$ 0.1 cm & $\ l_3 $ = 58.5 $\pm$ 0.1 cm \\
+\hline 3,918188 $\pm$ 0.000001 s & 2,929292 $\pm$ 0.000001 s & 2.617168 $\pm$ 0.000001 s \\
+\hline 3,922968 & 2.870240 & 2.581416\\
+\hline 3,937452 & 2.855972 & 2.571940\\
+\hline 3,920572 &2.847956 & 2.590868\\
+\hline 3,969420 & 2.878348 &  2.576096\\
+\hline 3,934120 &  \\
+\end{tabular}
+\end{center}
+\begin{center}
+\begin{tabular}{cc}
+\hline $\ l_4 $ = 31.5 $\pm$ 0.1 cm  & $\ l_5 $ =  13.8 $\pm$ 0.1 cm \\
+\hline  1.792400 $\pm$ 0.000001 s & 1.0475 $\pm$ 0.000001 s \\
+\hline 1.800360& 1.0454\\
+\hline 1.756248 & 1.0450 \\
+\hline 1.727764& 1.0378\\
+\hline 1.776672 & 1.0452\\
+\end{tabular}
+\end{center}
+\subsection{Misure di angoli di inclinazione in vari punti della guida metallica}
+\begin{table}[!htb]
+\begin{center}
+\begin{tabular}{cccccccc}
+\hline $\ 2.01^\circ$ $\pm  0.01^\circ$ & $\ 1.94^\circ$ $\pm 0.01^\circ$ & $\ 1.79^\circ$ $\pm 0.01^\circ$ & $\ 1.82^\circ$ 
+$\pm 0.01^\circ$ \\ $\ 1.87^\circ$ $\pm 0.01^\circ $  & $\ 1.86^\circ$ $\pm 0.01^\circ$  & $\ 1.92^\circ$ $\pm 0.01^\circ$
+\end{tabular}
+\end{center}
+\end{table}
+%\subsection {Misure relative alla stima dell'angolo del profilo "a V"}
+\subsection{Dati finali con le incertezze associate}
+\begin{table}[!htb]
+\begin{center}
+\begin{tabular}{ccc}
+$\ l_1 $ = 115.9 $\pm$ 0.1 cm  & $\ l_2 $ = 69.5 $\pm$ 0.1 cm & $\ l_3 $ = 58.5 $\pm$ 0.1 cm \\
+\hline 3.933 $\pm 0.009  $ s &  2.876 $\pm 0.016  $ s & $\ 2.587 \pm 0.009  $ s  \\
+\end{tabular}
+\end{center}
+\end{table}
+\begin{table}[!htb]
+\begin{center}
+\begin{tabular}{ccc}
+\hline $\ l_4 $ = 31.5 $\pm$ 0.1 cm  & $\ l_5 $ =  13.8 $\pm$ 0.1 cm & angolo inclinazione guida  \\
+\hline $\ 1.771 \pm 0.015  $ s  & $\ 1.044 \pm 0.002$ s & $\ 1.89 \pm 0.11^\circ$ \\
+\end{tabular}
+\end{center}
+\end{table}
+\section{Analisi dei dati} 
+Tramite fit grafico dei quadrati dei tempi con le relative distanze (per evidenziare il comportamento lineare e dunque poter effettuare un fit 
+grafico) abbiamo ottenuto il coefficiente angolare (la semisomma dei coefficienti angolari della retta con minor e maggior pendenza che intercettano
+i dati sperimentali come valore centrale e la loro semidispersione come errore) dell' equazione del moto  e dunque la relativa accelerazione. 
+Propagando opportunamente gli errori otteniamo per l'accelerazione il valore : $\ 1.54 $$\ 10^{-1} $ $\pm 0.14 $ $\frac{m}{s^2} $ .
+Allo stesso modo su carta bilogaritmica abbiamo stimato l'indice di potenza della legge del moto e propagando opportunamente gli errori 
+otteniamo : $\ 1.69$ $\pm 0.12 $. 
+\section{Conclusioni}
+I dati dell'esperienza non sono in completo accordo con la teoria. Il valore teorico dell'accelerazione \`e  infatti $\frac{5}{9}gsin(1.89^\circ)$ = 
+$\ 1.80 $$\ 10^{-1} $  $\pm 0.01 $ $\frac{m}{s^2} $ . Bisogna considerare l'errore influente dell'angolo (l'errore associato all'angolo \`e dell'ordine del 5\%)
+sul risultato dell'esperienza rispetto agli altri errori che sono relativamente molto piccoli (tempi e distanze hanno errori relativi minori dell'1\%).
+La guida metallica \`e infatti non perfettamente orizzontale e ci\`o ha influito sull'esito dell'esperienza.
+Lo stesso coefficiente angolare della retta ha un errore molto grande (dovuto probabilmente al fatto che la sfera aveva una piccola velocit\`a
+iniziale difficile da individuare e sottrarre ai dati) e il range dei valori non rientra completamente nel valore teorico 2. 
+\end{document}
