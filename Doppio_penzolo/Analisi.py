@@ -50,6 +50,8 @@ datiBattimenti,varBattimenti=curve_fit(fAccoppiato,lettura(dati[4][3],2),lettura
 battChi2=(((lettura(dati[4][3],2)-fAccoppiato(lettura(dati[4][3],3),datiBattimenti[0],datiBattimenti[1],datiBattimenti[2],datiBattimenti[3],datiBattimenti[4],datiBattimenti[5],datiBattimenti[6])/errore)**2)).sum()
 battDof=len(lettura(dati[4][3],2)-len(datiBattimenti))
 battPvalue=stats.chi2.pdf(battChi2,battDof)
+#y=vfAccoppiato(x,*datiBattimenti)
+
 print('questi sono i dati dei battimenti',datiBattimenti,varBattimenti)
 
 #fit delle oscillazioni in fase
@@ -60,6 +62,7 @@ datiFase,varFase=curve_fit(fSmorzato,lettura(dati[2][1],2)-lettura(dati[2][1],2)
 #y=vSmorzato(x,*datiFase)
 print('questi sono i dati dei pendoli in fase',datiFase,varFase)
 
+#fit delle oscillazioni in controfase
 tempi=lettura(dati[3][0],0)
 posizioni=lettura(dati[3][0],1)
 #fit delle oscillazioni in controfase
@@ -68,8 +71,8 @@ datiConFase,varConFase=curve_fit(fSmorzato,tempi-tempi[0],posizioni,confaseP0,ma
 pylab.plot(tempi-tempi[0],posizioni,'.')
 x=np.linspace(0,21.5,1000)
 y=vSmorzato(x,*datiConFase)
-#print('questi sono i dati dei pendoli in fase',datiConFase,varConFase)
-#y=vfAccoppiato(x,datiBattimenti[0],datiBattimenti[1],datiBattimenti[2],datiBattimenti[3],datiBattimenti[4],datiBattimenti[5],datiBattimenti[6])
+print('questi sono i dati dei pendoli in contro-fase',datiConFase,varConFase)
+
 pylab.xlabel("t[s]")
 pylab.ylabel("d[m]")
 pylab.plot(x,y)
