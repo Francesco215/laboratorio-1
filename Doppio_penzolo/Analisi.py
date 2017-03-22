@@ -35,11 +35,12 @@ def fSmorzato(tempo,decadimento,A,B,omega):
 	return np.exp(-tempo/decadimento)*(A*np.sin(omega*tempo)+B*np.cos(omega*tempo))
 
 #definisco la funzione dei battimenti
-def fAccoppiato(tempo,ampiezza,omega1,omega2,phi1,phi2,C):
-	coseno1=np.cos(tempo*(omega1+omega2)/2+(phi2+phi1)/2)
-	coseno2=np.cos(tempo*(omega1-omega2)/2+(phi2-phi1)/2)
-	return 2*ampiezza*coseno1*coseno2+C
-
+def fAccoppiato(tempo,ampiezza,coseno1,coseno2,phi1,phi2,C):
+	#coseno1=tempo*(omega1+omega2)/2
+	#coseno2=tempo*(omega1-omega2)/2
+	return 2*ampiezza*np.cos(tempo*coseno1+phi1)*np.cos(tempo*coseno2+phi2)+C
+#e la vettorizzo
+vfAccoppiato=np.vectorize(fAccoppiato)
 #creo una funzione che mi rileva i passaggi dall'asse delle x
 def zeri(file,colonnaposizioni):
 	a=lettura(file,colonnaposizioni)
@@ -76,9 +77,9 @@ def periodo(file,colonnatempi):
 	periodo[1]=np.std(intercette)*2
 	return periodo
 
-p0=np.array([0.03,2,4.4,0,0,0])
-parv,parc=curve_fit(fAccoppiato,lettura(dati[4][2],2),lettura(dati[4][2],3),p0,maxfev=10000)
-pylab.plot(lettura(dati[4][2],2),lettura(dati[4][2],3),'.')
+p0=np.array([0.7,0.75,20,0,0,0])
+parv,parc=curve_fit(fAccoppiato,lettura(dati[4][1],2),lettura(dati[4][1],3),p0)
+pylab.plot(lettura(dati[4][1],2),lettura(dati[4][1],3))
 
 #parv, parc = curve_fit(fSmorzato,lettura(dati[1][0],2),lettura(dati[1][0],3))
 #print("decadimento","A","B","omega")
@@ -88,9 +89,9 @@ pylab.plot(lettura(dati[4][2],2),lettura(dati[4][2],3),'.')
 
 
 #cose che si mettono sempre
-#print(parv)
+print(parv)
 x=np.linspace(0,40,1000)
-y=fAccoppiato(x,parv[0],parv[1],parv[2],parv[3],parv[4],parv[5])
+y=vfAccoppiato(x,parv[0],parv[1],parv[2],parv[3],parv[4],parv[5])
 pylab.xlabel("t[s]")
 pylab.ylabel("d[m]")
 pylab.plot(x,y)
