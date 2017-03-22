@@ -12,7 +12,7 @@ dati=[['dati/semplice1.txt','dati/2pendolosemplicesx.txt'],
       ['dati/3pendolosupersmorzato.txt','dati/4pendolosupersmorzato.txt'],
       ['dati/5doppiettodellefaville.txt','dati/6doppfav.txt'],
       ['dati/7doppfavcontro.txt','dati/8doppfavcontro.txt'],
-      ['dati/9doppfavbattim.txt','dati/battimenti.txt','dati/battimenti_2.txt']]
+      ['dati/9doppfavbattim.txt','dati/battimenti.txt','dati/battimenti_2.txt','dati/battimenti_copia.txt']]
 #annuncio gli arrei da riempire
 tempo=([])
 periodi=([])
@@ -35,10 +35,10 @@ def fSmorzato(tempo,decadimento,A,B,omega):
 	return np.exp(-tempo/decadimento)*(A*np.sin(omega*tempo)+B*np.cos(omega*tempo))
 
 #definisco la funzione dei battimenti
-def fAccoppiato(tempo,ampiezza,coseno1,coseno2,phi1,phi2,C):
+def fAccoppiato(tempo,ampiezza,coseno1,coseno2,phi1,phi2,C,decadimento):
 	#coseno1=tempo*(omega1+omega2)/2
 	#coseno2=tempo*(omega1-omega2)/2
-	return 2*ampiezza*np.cos(tempo*coseno1+phi1)*np.cos(tempo*coseno2+phi2)+C
+	return np.exp(-tempo/decadimento)*(2*ampiezza*np.cos(tempo*coseno1+phi1)*np.cos(tempo*coseno2+phi2))+C
 #e la vettorizzo
 vfAccoppiato=np.vectorize(fAccoppiato)
 #creo una funzione che mi rileva i passaggi dall'asse delle x
@@ -77,9 +77,10 @@ def periodo(file,colonnatempi):
 	periodo[1]=np.std(intercette)*2
 	return periodo
 
-p0=np.array([0.7,0.75,20,0,0,0])
-parv,parc=curve_fit(fAccoppiato,lettura(dati[4][1],2),lettura(dati[4][1],3),p0)
-pylab.plot(lettura(dati[4][1],2),lettura(dati[4][1],3))
+p0=np.array([0.07,6.28/0.75,6.28/40,0,0,0,30])
+parv1,parc1=curve_fit(fAccoppiato,lettura(dati[4][1],2),lettura(dati[4][1],3),p0,maxfev=50000)
+parv,parc=curve_fit(fAccoppiato,lettura(dati[4][3],2),lettura(dati[4][3],3),parv1,maxfev=50000)
+pylab.plot(lettura(dati[4][3],2),lettura(dati[4][3],3),'.')
 
 #parv, parc = curve_fit(fSmorzato,lettura(dati[1][0],2),lettura(dati[1][0],3))
 #print("decadimento","A","B","omega")
@@ -90,8 +91,8 @@ pylab.plot(lettura(dati[4][1],2),lettura(dati[4][1],3))
 
 #cose che si mettono sempre
 print(parv)
-x=np.linspace(0,40,1000)
-y=vfAccoppiato(x,parv[0],parv[1],parv[2],parv[3],parv[4],parv[5])
+x=np.linspace(0,90,1000)
+y=vfAccoppiato(x,parv[0],parv[1],parv[2],parv[3],parv[4],parv[5],parv[6])
 pylab.xlabel("t[s]")
 pylab.ylabel("d[m]")
 pylab.plot(x,y)
