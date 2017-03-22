@@ -9,11 +9,7 @@ g=9.81
 misure_angoli=['dati/misura_angolo1.txt','dati/misura_angolo2.txt','dati/misura_angolo3.txt','dati/misura_angolo4.txt','dati/misura_angolo5.txt']
 piccoleOscillazioni='dati/piccole_oscillazioni1.txt'
 
-#funzione del pendolo quadrifilare
-def funzione(tPassaggio,distanza_cm,distanza_bandiera,P1,P2):
-	theta=np.arccos((distanza_cm*larghezza_bandiera**2)/(2*tPassaggio*distanza_bandiera*g))
-	return (1+P1*theta**2+P2*theta**4)*2*np.pi*np.sqrt(distanza_cm/g)
-#funzione che legge un file e restituisce un array del periodo e del tempo di passaggio
+#creo una funzione che mi legge il file e mi ritorna il periodo e il tempo di passaggio sotto forma di vettori
 def lettura(file):
 	numero,passaggio,tempo=loadtxt(file,unpack=True)
 	Periodo=np.array([])
@@ -23,11 +19,7 @@ def lettura(file):
 		tPassaggio=np.insert(tPassaggio,len(tPassaggio),tempo[i-1]-tempo[i-2])
 	return Periodo,tPassaggio
 
-#mi ricavo la distanza equivalente e la metto nei parametri iniziali
-distanza_cm=9.81*np.mean(lettura(piccoleOscillazioni)[0])**2/(4*np.pi**2)
-p0=np.array([distanza_cm,distanza_bandiera[0],1/16,11/3072])
-Periodo,tPassaggio=lettura(misure_angoli[0])
-
-valori,covarianza=curve_fit(funzione,Periodo,tPassaggio,p0)
-
+def funzione():
+	v0=
+	theta=np.arcos(1-v0**2/(2*g*distanza_bandiera))
 
