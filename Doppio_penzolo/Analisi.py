@@ -34,10 +34,12 @@ def lettura(file,colonna):
 def fSmorzato(tempo,decadimento,A,B,omega):
 	return np.exp(-tempo/decadimento)*(A*np.sin(omega*tempo)+B*np.cos(omega*tempo))
 
+#definisco la funzione dei battimenti
 def fAccoppiato(tempo,ampiezza,omega1,omega2,phi1,phi2,C):
 	coseno1=np.cos(tempo*(omega1+omega2)/2+(phi2+phi1)/2)
 	coseno2=np.cos(tempo*(omega1-omega2)/2+(phi2-phi1)/2)
 	return 2*ampiezza*coseno1*coseno2+C
+
 #creo una funzione che mi rileva i passaggi dall'asse delle x
 def zeri(file,colonnaposizioni):
 	a=lettura(file,colonnaposizioni)
@@ -51,6 +53,7 @@ def zeri(file,colonnaposizioni):
 			if a[i+1]>0:
 				intercette=np.insert(intercette,len(intercette),b[i])
 	return intercette
+
 #definisco una funzione che mi trova i massimi
 def massimi(file,colonnaposizioni,lista):
 	a=lettura(file,colonnaposizioni)
@@ -61,6 +64,8 @@ def massimi(file,colonnaposizioni,lista):
 			if a[i+2]<a[i+1]:
 				massimi=np.insert(massimi,len(massimi),b[i+1])
 	return massimi
+
+#definisco una funzione che mi ritorna un vettore 2D con la media e la dev standard del periodo
 def periodo(file,colonnatempi):
 	intercette=([])
 	periodo=([0,0])
