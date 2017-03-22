@@ -4,8 +4,10 @@
 import numpy as np
 from scipy.optimize import curve_fit
 from scipy import constants
+from scipy import stats
 import pylab
 lpiscina=([0.248,0.001])
+errore=lpiscina[0]/1023
 media=([0,443.2760778859527,0,469.16133518776076])
 #elenco tutti i file in delle liste
 dati=[['dati/semplice1.txt','dati/2pendolosemplicesx.txt'],
@@ -82,15 +84,11 @@ parv1,parc1=curve_fit(fAccoppiato,lettura(dati[4][1],2),lettura(dati[4][1],3),p0
 parv,parc=curve_fit(fAccoppiato,lettura(dati[4][3],2),lettura(dati[4][3],3),parv1,maxfev=50000)
 pylab.plot(lettura(dati[4][3],2),lettura(dati[4][3],3),'.')
 
-#parv, parc = curve_fit(fSmorzato,lettura(dati[1][0],2),lettura(dati[1][0],3))
-#print("decadimento","A","B","omega")
-#print(parv)
-#y=fSmorzato(x,parv[0],parv[1],parv[2],parv[3])
-#pylab.plot(lettura(dati[1][0],2),lettura(dati[1][0],3),'.')
+suca=(((lettura(dati[4][3],2)-fAccoppiato(lettura(dati[4][3],3),parv[0],parv[1],parv[2],parv[3],parv[4],parv[5],parv[6])/errore)**2)).sum()
+dof=len(lettura(dati[4][3],2)-len(parv))
+pvalue=stats.chi2.pdf(suca,dof)
 
-
-#cose che si mettono sempre
-print(parv)
+print('pvalue=%.7f chi2=%f ' %(pvalue,suca))
 x=np.linspace(0,90,1000)
 y=vfAccoppiato(x,parv[0],parv[1],parv[2],parv[3],parv[4],parv[5],parv[6])
 pylab.xlabel("t[s]")
