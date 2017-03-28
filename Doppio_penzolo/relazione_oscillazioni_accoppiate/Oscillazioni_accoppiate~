@@ -1,0 +1,55 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage{ amssymb }
+\title{Oscillazioni accoppiate}
+\author{Francesco Sacco, Francesco Tarantelli e Sucameli Giovanni}
+\date{} 
+\begin{document}
+\maketitle
+\section{Scopo dell'esperienza}
+Lo scopo di questa esperienza \`e lo studio del moto di due pendoli accoppiati ed in particolare del fenomeno dei battimenti.
+\section{Cenni teorici}
+Il sistema da studiare \`e formato da due pendoli uguali "accoppiati" attraverso una molla di costante elastica k. 
+La forza che accoppia i due pendoli \`e : 
+\begin{equation} \label{equazione_uno}
+F_k = -k(asin(\theta_2) - asin(\theta_1)- l_0) 
+\end{equation}
+Esso \`e dunque un sistema di equazioni che si diagonalizza per trovare le soluzioni.
+Il moto del sistema non \`e in generale armonico ma esistono due configurazioni iniziali 
+(corrispondenti ai modi normali di oscillazione) per cui il moto di entrambi i pendoli \`e armonico : 
+quella in cui si muovono in fase e quella in cui si muovono in controfase.
+
+Nell'oscillazione in fase i due pendoli sono inizialmente spostati nello stesso verso e della stessa ampiezza
+e vengono lasciati andare contemporeanamente. In queste condizioni la molla non viene sollecitata e dunque 
+$\omega_f \cong \omega_0$ , dove $\omega_f$ indica la frequenza di oscillazione dei due pendoli in
+fase e $\omega_0$ la frequenza naturale (o di risonanza) del pendolo.
+
+Nell'oscillazione in controfase i due pendoli vengono spostati del verso opposto e di uguali ampiezze e di nuovo
+vengono lasciati andare contemporeanamente. In queste condizioni la molla viene sollecitata in maniera simmetrica dai
+due pendoli cambiandone la frequenza di oscillazione $\omega_c $\textgreater$ \omega_f$, dove $\omega_c$ indica la frequenza dei pendoli in controfase.
+
+Per ottenere i battimenti spostiamo un pendolo dalla sua posizione di equilibrio mantenendo il secondo fermo e lasciamo oscillare il sistema. 
+Si ricava che il moto risultante è dato da : 
+\begin{equation} \label{equazione_2}
+x(t) = \A_0[cos(\omega_f + \phi_1) + cos(\omega_c + \phi_2)] 
+
+\end{equation}
+o, per le formule di prostaferesi
+\begin{equation}
+x(t) = \2A_0{cos[\frac{(\omega_c + \omega_f)t]
+\end{equation}
+
+\section{Materiali a disposizione}
+\begin{itemize}
+\item Due pendoli accoppiati attraverso una molla;
+\item Uno smorzatore (galleggiante da pesca);
+\item Sistema di acquisizione per registrare la posizione di ciascun pendolo in funzione del tempo.
+\end{itemize}
+\section{Descrizione delle misure}
+\section{Analisi dei dati}
+\section{Conclusioni}
+
+
+
+
+
+\end{document}
