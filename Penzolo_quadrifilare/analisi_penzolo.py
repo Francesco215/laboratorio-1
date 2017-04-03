@@ -3,6 +3,7 @@ import numpy as np
 from scipy import loadtxt
 import pylab 
 from scipy.optimize import curve_fit 
+from scipy.stats import chi2
 larghezza_bandiera=np.array([0.0210,0.0005])
 distanza_bandiera=np.array([1.164,0.01])
 distanzaCm=np.array([1.117,0.01])
@@ -30,11 +31,22 @@ def fPeriodo(tempoTransito,distanza_cm,p1,p2):
 #print(len(lettura(misure_angoli[0])[1]),len(lettura(misure_angoli[0])[0]))
 p0=np.array([1.11,1/16,11/3072])
 popt,pcov=curve_fit(fPeriodo,lettura(misure_angoli[0])[1],lettura(misure_angoli[0])[0],p0)
-dl=pcov.diagonal()
-print(lettura(misure_angoli[0]),[0])
+dl,dp1,dp2=pcov.diagonal()
+print('distanza cm= %.2f+-%.2f,p1=%.3f +- %.3f,p2=%.3f +- %.3f'%(popt[0],dl,popt[1],dp1,popt[2],dp2))
+
+def tempo_transito(theta):
+	return larghezza_bandiera[0]*popt[0]/(distanza_bandiera[0]*np.sqrt(2*g*popt[0]*(1-np.cos(theta))))
 
 v0=larghezza_bandiera[0]*popt[0]/(lettura(misure_angoli[0])[1]*distanza_bandiera[0])
 theta=np.arccos(1-v0**2/(2*g*popt[0]))
 
-pylab.plot(theta,lettura(misure_angoli[0])[0],'.')
+achi2=(((lettura(misure_angoli[0])[0]-fPeriodo(lettura(misure_angoli[0])[1],*popt))/0.00007)**2).sum()
+dof=len(lettura(misure_angoli[0])[0])-len(popt)
+pvalue=chi2.cdf(achi2,dof)
+
+print((achi2,dof,pvalue))
+x=np.linspace(0.36,0.4,1000)
+y=fPeriodo(tempo_transito(x),*popt)
+pylab.errorbar(theta,lettura(misure_angoli[0])[0],0.00007,fmt='o')
+pylab.plot(x,y)
 pylab.show()
