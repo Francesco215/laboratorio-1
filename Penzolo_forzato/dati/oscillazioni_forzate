@@ -1,0 +1,19 @@
+\documentclass{article}
+\title{Oscillazioni forzate}
+\author{Francesco Tarantelli, Francesco Sacco e Giovanni Sucameli}
+\date{3 Aprile 2017}
+\begin{document}
+\maketitle
+\section{Scopo dell'esperienza}
+Lo scopo dell'esperienza è lo studio del fenomeno della risonanza.
+\section{Cenni teorici}
+Il nostro modello \`e un pendolo fisico con attrito e sollecitato da una forza esterna variabile in modo sinusoidale
+nel pendolo. L'equazione differenziale che descrive il moto di questo sistema
+( in approssimazione di piccole oscillazioni ) è:
+\begin{equation}\label{equazione_oscillatore}
+\frac{ d^{2}\theta }{dt^{2} } + 2 \gamma  \frac{d \theta }{dt} + \omega^{2} \theta = \F_0 cos \left( \omega t right) .
+
+
+\end{equation}
+
+\end{document}
