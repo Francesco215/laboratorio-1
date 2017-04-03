@@ -2,6 +2,7 @@
 \date{3 Aprile 2017}
 \usepackage[italian]{babel}
 \usepackage[T1]{fontenc}
+\usepackage{graphicx}
 \title{Pendolo quadrifilare}
 \author{Francesco Sacco, Francesco Tarantelli, Giovanni Sucameli}
 \begin{document}
@@ -16,7 +17,7 @@
 		dove $m$ \'e la massa del pendolo, $l$ \'e la lunghezza del cavo, $\theta$ \'e l'angolo formato con la normale a pavimento e $g$ \'e l'accelerazione di gravit\'a.\par
 		Sviluppando l'equazione \ref{eq:asd} in serie di Taylor si ottiene l'equazione approssimata del periodo $T$
 		\begin{equation}
-			T=2\pi\sqrt{\frac{l}{g}}\bigg(1+\frac{1}{16}\theta_{0}^2+\frac{11}{3072}\theta_{0}^4\bigg)
+			T=2\pi\sqrt{\frac{l}{g}}\bigg(1+\frac{1}{16}\theta_{0}^2+\frac{11}{3072}\theta_{0}^4+\dots\bigg)
 		\end{equation}
 	\section{Materiale a disposizione}
 		\begin{itemize}
@@ -25,5 +26,8 @@
 			\item Traguardo ottico
 			\item Dispositivo di acquisizione dati
 		\end{itemize}
-		\includegraphics{schema_pendolo}
+		\includegraphics[scale=0.5]{schema_pendolo}
+	\newpage
+	\section{Analisi Dati}
+	\section{Conclusione}
 \end{document}
