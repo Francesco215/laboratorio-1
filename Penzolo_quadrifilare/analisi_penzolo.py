@@ -44,7 +44,7 @@ achi2=(((lettura(misure_angoli[0])[0]-fPeriodo(lettura(misure_angoli[0])[1],*pop
 dof=len(lettura(misure_angoli[0])[0])-len(popt)
 pvalue=chi2.cdf(achi2,dof)
 
-print((achi2,dof,pvalue))
+print('chi2=%.2f,gradi di libertà=%.2f,pValue=%.2f'%(achi2,dof,pvalue))
 x=np.linspace(0.36,0.4,1000)
 y=fPeriodo(tempo_transito(x),*popt)
 pylab.errorbar(theta,lettura(misure_angoli[0])[0],0.00007,fmt='o')
