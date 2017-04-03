@@ -1,0 +1,77 @@
+\documentclass{article}
+
+\usepackage{graphicx}
+\usepackage[italian]{babel}
+\usepackage{booktabs}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norma}{\lVert}{\rVert}
+
+
+\begin{document}
+
+
+
+\author{Francesco Tarantelli, Francesco Sacco, Giovanni Sucamelo}
+\title{Oscillazioni accoppiate}
+\maketitle
+
+
+
+\section{Cenni Teorici}
+\subsection{Pendolo singolo}
+In questa prima parte si cerca di verificare semplicemente che la pulsazione angolare $\omega_o$ del pendolo fisico senza attrito sia uguale a 
+\begin{equation}
+\omega_o=\sqrt{\frac{mgl}{I}}
+\end{equation}
+In seguito con lo smorzatore si è stimato il decadimento $\tau $ dell'ampiezza si oscillazione
+\begin{equation}
+\theta_o(t)=\theta_o(0)e^{-\frac{t}{\tau}}
+\end{equation}
+\subsection{Oscillazioni in fase e in controfase}
+Nelle oscillazioni in fase e in controfase si è in sostanza verificato l'equazione del moto dei pendoli nei due modi normali ottenuti dal sistema per un pendolo semplice:
+
+\[
+\begin{cases} 
+m x''_1=-\frac{mg}{l}x_1 + k(x_2-x_1) -\frac{m}{\tau} x'_1 \\
+m x''_2=-\frac{mg}{l}x_2 -  k(x_2-x_1) - \frac{m}{\tau} x'_2
+\end{cases}
+\]
+
+che equivale a:
+
+\[
+\begin{bmatrix}
+m & 0 \\
+0 & m
+\end{bmatrix}
+\mathbf{q''}=-
+\begin{bmatrix}
+\frac{mg}{l} + k & -k \\
+-k & \frac{mg}{l} + k \\
+\end{bmatrix}
+\mathbf{q} -
+\begin{bmatrix}
+\frac{m}{\tau} & 0 \\
+0 & \frac{m}{\tau} 
+\end{bmatrix}
+\mathbf{q'} 
+\]
+
+dove q=$
+\begin{bmatrix}
+x_1 \\
+x_2
+\end{bmatrix}$
+. La soluzione generale di questa equzione pu\'o essere scritta nella forma:
+\begin{equation}
+\label{eq1}
+x(t)= A_0 e^{-\frac{t}{\tau}}[\cos(\omega_1 t + \phi_1) +\sin(\omega_2 t + \phi_2) ]
+\end{equation}
+in particolare trascurando l'attrito, $\omega_1$ e $\omega_2$ sono uguali alle pulsioni angolari dei modi normali ($\omega_{fase}^2=\frac{g}{l} \omega_{contro}^2=\frac{g}{l}+2\frac{k}{m} $). L'equazione \eqref{eq1} è molto importante in quanto è utilizzata per descrivere i battimenti.
+
+
+
+\end{document}
