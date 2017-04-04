@@ -33,22 +33,24 @@ def lettura(file,colonna):
 def fSmorzato(tempo,decadimento,ampiezza,phi,omega,C):
 	return np.exp(-tempo/decadimento)*ampiezza*np.sin(omega*tempo+phi)+C
 
-vSmorzato=np.vectorize(fSmorzato)
 #definisco la funzione dei battimenti
 def fAccoppiato(tempo,ampiezza,omega1,omega2,phi1,phi2,C,decadimento):
 	#coseno1=tempo*(omega1+omega2)/2
 	#coseno2=tempo*(omega1-omega2)/2
 	return np.exp(-tempo/decadimento)*2*ampiezza*np.cos(tempo*omega1+phi1)*np.cos(tempo*omega2+phi2)+C
-#e la vettorizzo
+
+#e li vettorizzo
+vfAccoppiato=np.vectorize(fAccoppiato)
+vSmorzato=np.vectorize(fSmorzato)
 
 #fit coso smorzato
-vfAccoppiato=np.vectorize(fAccoppiato)
 smoP0=np.array([30,0.015,3.15,6.28/0.75,0.03])
-datismo,varismo=curve_fit(fSmorzato,lettura(dati[1][1],0),lettura(dati[1][1],1),smoP0,maxfev=50000)
+datismo,varismo=curve_fit(fSmorzato,lettura(dati[1][0],2),lettura(dati[1][0],3),smoP0,maxfev=100000)
 print('questi sono i dati del pendolo smorzato',datismo,varismo.diagonal())
-pylab.plot(lettura(dati[1][1],0)-lettura(dati[1][1],0)[0],lettura(dati[1][1],1)-datismo[4],'.')
-x=np.linspace(0,40,1000)
-y=vSmorzato(x,*datismo)-datismo[4]
+#pylab.plot(lettura(dati[1][0],2)-lettura(dati[1][0],2)[0],lettura(dati[1][0],3)-datismo[4],'.')
+#x=np.linspace(0,40,1000)
+#y=vSmorzato(x,*datismo)-datismo[4]
+#pylab.title("fit pendolo smorzato")
 
 #fit dei battimenti e chi^2 dei battimenti
 battP0=np.array([0.07,6.28/0.75,6.28/40,0,0,0,30])
@@ -65,10 +67,11 @@ print('questi sono i dati dei battimenti',datiBattimenti,varBattimenti.diagonal(
 #fit delle oscillazioni in fase
 faseP0=np.array([30,0.015,3.15,6.28/0.75,0.03])
 datiFase,varFase=curve_fit(fSmorzato,lettura(dati[2][1],2)-lettura(dati[2][1],2)[0],lettura(dati[2][1],3),faseP0,maxfev=10000)
-#pylab.plot(lettura(dati[2][1],2)-lettura(dati[2][1],2)[0],lettura(dati[2][1],3),'.')
-#x=np.linspace(0,30,1000)
-#y=vSmorzato(x,*datiFase)
+pylab.plot(lettura(dati[2][1],2)-lettura(dati[2][1],2)[0],lettura(dati[2][1],3)-datiFase[4],'.')
+x=np.linspace(0,30,1000)
+y=vSmorzato(x,*datiFase)-datiFase[4]
 print('questi sono i dati dei pendoli in fase',datiFase,varFase.diagonal())
+pylab.title("Pendoli in fase")
 
 #fit delle oscillazioni in controfase
 tempi=lettura(dati[3][0],0)

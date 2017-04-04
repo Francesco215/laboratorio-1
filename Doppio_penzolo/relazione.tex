@@ -23,7 +23,7 @@
 			\begin{equation}
 				\omega_o=\sqrt{\frac{mgl}{I}}
 			\end{equation}
-			In seguito con lo smorzatore si è stimato il decadimento $\tau $ dell'ampiezza si oscillazione
+			In seguito con lo smorzatore si \'e stimato il decadimento $\tau $ dell'ampiezza si oscillazione
 			\begin{equation}
 				\theta_o(t)=\theta_o(0)e^{-\frac{t}{\tau}}
 			\end{equation}
@@ -78,19 +78,61 @@
 		\end{itemize}
 
 	\section{Analisi dati}
-		Per prima misurazione abbiamo analizzato il moto di un pendolo con galleggiante per trovare la costante di smorzamento $\tau$
-	\begin{minipage}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{fit_smorzato}
-		\end{minipage}
-	\begin{minipage}{0.5\textwidth}
-		\begin{tabular}{ll}
-			\toprule
-			Dati & Parametri ottimali \\
-			\midrule
-			$\tau$ & 29,94 $\pm$ 0,037
-			\bottomrule
+		%Smorzato -------------------------------------------------------------------------
+		Per prima misurazione abbiamo analizzato il moto di un pendolo con galleggiante per trovare la costante di smorzamento $\tau$ \\
+		\begin{minipage}{0.5\textwidth}
+			\includegraphics[width=\textwidth]{fit_smorzato}
+			\end{minipage}
+		\begin{minipage}{0.5\textwidth}
+			\begin{tabular}{ll}
+				\toprule
+				Dati & Parametri ottimali \\
+				\midrule
+				$\tau$ & $16,24 \pm 0,02$ \\
+				$A_{0}$ & $4,51 \pm 6,01(10^{-6})$cm\\
+				$\omega$ & $4,42 \pm 2,7(10^{-7})\textrm{s}^{-1}$\\			
+				$\phi$ & $3,94 \pm 3,16$\\
+				\bottomrule
 
-		\end{tabular}
-	\end{minipage}
+			\end{tabular}
+		\end{minipage}
+		Si osservi che i punti sperimentali non seguono perfettamente una curva esponenziale, poich\'e il modello teorico non tiene in considerazione distubi esterni come l'attrito del perno e rumore esterno, e a causa di ci\'o il chi quadro risulta enorme, tuttavia la precisione sull'ampiezza e sul periodo \'e comunque parecchio elevata\par \bigskip
+
+		%In fase ---------------------------------------------------------------------------
+		In seguito abbiamo raccolto i dati degli oscillatori in fase, come si pu\'o notare $\omega$ che $\tau$ sono praticamente uguali a quelli dell'oscillatore singolo, questo perch\'e la molla resta alla sua posizione di riposo e quindi \'e come se non ci fosse\\
+		\begin{minipage}{0.5\textwidth}
+			\includegraphics[width=\textwidth]{fase}
+			\end{minipage}
+		\begin{minipage}{0.5\textwidth}
+			\begin{tabular}{ll}
+				\toprule
+				Dati & Parametri ottimali \\
+				\midrule
+				$\tau$ & $15,72 \pm 0,02$ \\
+				$A_{0}$ & $17,29 \pm 6,75(10^{-7})$cm\\
+				$\omega$ & $4,17 \pm 2,41(10^{-5})\textrm{s}^{-1}$\\			
+				$\phi$ & $4,45 \pm 2,63(10^{-7})$\\
+				\bottomrule
+			\end{tabular}
+		\end{minipage}
+		In questo grafico abbiamo traslato il centro dell'oscillazione a 0, perchè la molla spostava la posizione d'equilibrio verso l'altro pendolo, inoltre abbiamo messo solo il grafico di uno dei due pendoli, visto che inserire l'altro risultava ridondante\par \bigskip
+
+		%In controfase ---------------------------------------------------------------------
+
+		\begin{minipage}{0.5\textwidth}
+			\includegraphics[width=\textwidth]{fase}
+			\end{minipage}
+		\begin{minipage}{0.5\textwidth}
+			\begin{tabular}{ll}
+				\toprule
+				Dati & Parametri ottimali \\
+				\midrule
+				$\tau$ & $15,72 \pm 0,02$ \\
+				$A_{0}$ & $17,29 \pm 6,75(10^{-7})$cm\\
+				$\omega$ & $4,17 \pm 2,41(10^{-5})\textrm{s}^{-1}$\\			
+				$\phi$ & $4,45 \pm 2,63(10^{-7})$\\
+				\bottomrule
+			\end{tabular}
+		\end{minipage}
 
 \end{document}

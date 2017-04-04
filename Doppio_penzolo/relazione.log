@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.22)  3 APR 2017 21:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.22)  4 APR 2017 12:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**relazione
+**relazione.tex
 (./relazione.tex
 LaTeX2e <2016/03/31>
 Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
@@ -354,17 +354,38 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 74.
  [1
 
-{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
+{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+<fit_smorzato.png, id=20, 578.16pt x 433.62pt>
+File: fit_smorzato.png Graphic file (type png)
+ <use fit_smorzato.png>
+Package pdftex.def Info: fit_smorzato.png used on input line 84.
+(pdftex.def)             Requested size: 234.8775pt x 176.15768pt.
+
+Overfull \hbox (2.22168pt too wide) in paragraph at lines 82--99
+[]$ $[]$
+ []
+
+<fase.png, id=22, 578.16pt x 433.62pt>
+File: fase.png Graphic file (type png)
+ <use fase.png>
+Package pdftex.def Info: fase.png used on input line 104.
+(pdftex.def)             Requested size: 234.8775pt x 176.15768pt.
+
+Overfull \hbox (2.22168pt too wide) in paragraph at lines 102--119
+[]$ $[]$ 
+ []
+
+[2 <./fit_smorzato.png> <./fase.png>]
 This exam contains 0 questions with 0 parts, 0 subparts, and 0 subsubparts.
 (./relazione.aux) ) 
 Here is how much of TeX's memory you used:
- 4667 strings out of 493014
- 62817 string characters out of 6133350
+ 4682 strings out of 493014
+ 63019 string characters out of 6133350
  153311 words of memory out of 5000000
- 8151 multiletter control sequences out of 15000+600000
- 13045 words of font info for 37 fonts, out of 8000000 for 9000
+ 8161 multiletter control sequences out of 15000+600000
+ 14579 words of font info for 39 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,9n,24p,794b,191s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,12n,24p,798b,214s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/cm-super
 /cm-super-t1.enc}</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
@@ -380,10 +401,10 @@ b></usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb>
 usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></us
 r/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/
 local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb>
-Output written on relazione.pdf (2 pages, 149968 bytes).
+Output written on relazione.pdf (2 pages, 305206 bytes).
 PDF statistics:
- 68 PDF objects out of 1000 (max. 8388607)
- 49 compressed objects within 1 object stream
+ 73 PDF objects out of 1000 (max. 8388607)
+ 50 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
