@@ -32,8 +32,8 @@
 
 		\begin{equation}
 			\begin{cases} 
-				m x''_1=-\frac{mg}{l}x_1 + k(x_2-x_1) -\frac{m}{\tau} x'_1 \\
-				m x''_2=-\frac{mg}{l}x_2 -  k(x_2-x_1) - \frac{m}{\tau} x'_2
+				m \ddot{\theta_{1}}=-\frac{mg}{l}\theta_1 + k(\theta_2-\theta_1) -\frac{m}{\tau}\dot{\theta_1} \\
+				m \ddot{\theta_{2}}=-\frac{mg}{l}x_2 -  k(\theta_2-\theta_1) - \frac{m}{\tau} \dot{\theta_{2}}
 			\end{cases}
 		\end{equation}
 
@@ -59,15 +59,15 @@
 
 		dove q=$
 		\begin{bmatrix}
-			x_1 \\
-			x_2
+			\theta_1 \\
+			\theta_2
 		\end{bmatrix}$
 		. La soluzione generale di questa equzione pu\'o essere scritta nella forma:
 		\begin{equation}
 			\label{eq1}
-			x(t)= A_0 e^{-\frac{t}{\tau}}[\cos(\omega_1 t + \phi_1) +\sin(\omega_2 t + \phi_2) ]
+			\theta(t)= A_0 e^{-\frac{t}{\tau}}[\cos(t\omega_f + \phi_1) +\sin(t\omega_c + \phi_2) ]
 		\end{equation}
-		in particolare trascurando l'attrito, $\omega_1$ e $\omega_2$ sono uguali alle pulsioni angolari dei modi normali\\($\omega_{fase}^2=\frac{g}{l} \omega_{contro}^2=\frac{g}{l}+2\frac{k}{m} $). L'equazione \ref{eq1} \'e molto importante perch\'e viene utilizzata per descrivere i battimenti.
+		in particolare trascurando l'attrito, $\omega_f$ e $\omega_c$ sono uguali alle pulsioni angolari dei modi normali\\($\omega_{f}^2=\frac{g}{l} \omega_{c}^2=\frac{g}{l}+2\frac{k}{m} $). L'equazione \ref{eq1} \'e molto importante perch\'e viene utilizzata per descrivere i battimenti.
 
 	\section{Apparato sperimentale}
 		\begin{itemize}
@@ -80,7 +80,7 @@
 	\section{Analisi dati}
 		%Smorzato -------------------------------------------------------------------------
 		\subsection{Pendolo smorzato}
-			Per prima misurazione abbiamo analizzato il moto di un pendolo con galleggiant	e per trovare la costante di smorzamento $\tau$ \\
+			Per prima misurazione abbiamo analizzato il moto di un pendolo con galleggiante	e per trovare la costante di smorzamento $\tau_{0}$ \\
 			\begin{minipage}{0.5\textwidth}
 				\includegraphics[width=\textwidth]{fit_smorzato}
 				\end{minipage}
@@ -89,10 +89,10 @@
 					\toprule
 					Dati & Parametri ottimali \\
 					\midrule
-					$\tau$ & $16,24 \pm 0,02$ \\
+					$\tau_{0}$ & $16,24 \pm 0,02$ \\
 					$A_{0}$ & $4,51 \pm 6,01(10^{-6})$cm\\
-					$\omega$ & $4,42 \pm 2,7(10^{-7})\textrm{s}^{-1}$\\			
-					$\phi$ & $3,94 \pm 3,16$\\
+					$\omega_{0}$ & $4,42 \pm 2,7(10^{-7})\textrm{s}^{-1}$\\			
+					$\phi_{0}$ & $3,94 \pm 3,16$\\
 					\bottomrule
 
 				\end{tabular}
@@ -101,7 +101,7 @@
 
 		%In fase ---------------------------------------------------------------------------
 			\subsection{Pendoli in fase}
-			In seguito abbiamo raccolto i dati degli oscillatori in fase, come si pu\'o notare $\omega$ che $\tau$ sono praticamente uguali a quelli dell'oscillatore singolo, questo perch\'e la molla resta alla sua posizione di riposo e quindi \'e come se non ci fosse\\
+			In seguito abbiamo raccolto i dati degli oscillatori in fase, come si pu\'o notare $\omega_{1}$ che $\tau_{1}$ sono praticamente uguali a $\omega_{0}$ e $\tau_{0}$ , questo perch\'e la molla resta alla sua posizione di riposo e quindi \'e come se non ci fosse\\
 			\begin{minipage}{0.5\textwidth}
 				\includegraphics[width=\textwidth]{fase}
 			\end{minipage}
@@ -110,10 +110,10 @@
 					\toprule
 					Dati & Parametri ottimali \\
 					\midrule
-					$\tau$ & $15,72 \pm 0,02$ \\
-					$A_{0}$ & $17,29 \pm 6,75(10^{-7})$cm\\
-					$\omega$ & $4,17 \pm 2,41(10^{-5})\textrm{s}^{-1}$\\			
-					$\phi$ & $4,45 \pm 2,63(10^{-7})$\\
+					$\tau_{f}$ & $15,72 \pm 0,02$ \\
+					$A_{f}$ & $17,29 \pm 6,75(10^{-7})$cm\\
+					$\omega_{f}$ & $4,17 \pm 2,41(10^{-5})\textrm{s}^{-1}$\\			
+					$\phi_{f}$ & $4,45 \pm 2,63(10^{-7})$\\
 					\bottomrule
 				\end{tabular}
 			\end{minipage}
@@ -121,7 +121,7 @@
 
 		%In controfase ---------------------------------------------------------------------
 		\subsection{Pendoli in controfase}
-			Prima di effettuare la misura dei battimenti abbiamo fatto quella dei pendoli in controfase cosicch\'e ottiniamo i valori di $\omega$ per verificare che ci\'o che \'e scritto nei cenni teorici\\
+			Prima di effettuare la misura dei battimenti abbiamo fatto quella dei pendoli in controfase cosicch\'e ottiniamo i valori di $\omega_{c}$ per verificare che ci\'o che \'e scritto nei cenni teorici\\
 			\begin{minipage}{0.5\textwidth}
 				\includegraphics[width=\textwidth]{controfase}
 				\end{minipage}
@@ -130,10 +130,10 @@
 					\toprule
 					Dati & Parametri ottimali \\
 					\midrule
-					$\tau$ & $17,27 \pm 0,03$ \\
-					$A_{0}$ & $1,53 \pm 4,89(10^{-7})$cm\\
-					$\omega$ & $6,51 \pm 2,11(10^{-5})\textrm{s}^{-1}$\\			
-					$\phi$ & $4,61 \pm 2,87(10^{-7})$\\
+					$\tau_{c}$ & $17,27 \pm 0,03$ \\
+					$A_{c}$ & $1,53 \pm 4,89(10^{-7})$cm\\
+					$\omega_{c}$ & $6,51 \pm 2,11(10^{-5})\textrm{s}^{-1}$\\			
+					$\phi_{c}$ & $4,61 \pm 2,87(10^{-7})$\\
 					\bottomrule
 				\end{tabular}
 			\end{minipage}
@@ -149,13 +149,18 @@
 					\toprule
 					Dati & Parametri ottimali \\
 					\midrule
-					$\tau$ & $17,27 \pm 0,03$ \\
-					$A_{0}$ & $1,53 \pm 4,89(10^{-7})$cm\\
-					$\omega_{a}$ & $6,51 \pm 2,11(10^{-5})\textrm{s}^{-1}$\\
-					$\omega_{b}$ & $6,51 \pm 2,11(10^{-5})\textrm{s}^{-1}$\\			
-					$\phi$ & $4,61 \pm 2,87(10^{-7})$\\
+					$\tau$ & $64,30 \pm 0,09$ \\
+					$A$ & $3,55 \pm strano(10^{-7})$cm\\
+					$\omega_{a}$ & $4,51 \pm 4,70(10^{-9})\textrm{s}^{-1}$\\
+					$\omega_{b}$ & $6,48 \pm 6,64(10^{-9})\textrm{s}^{-1}$\\			
+					$\phi_{a}$ & $2,05 \pm 4,37(10^{-6})$\\
+					$\phi_{b}$ & $3,19 \pm 9,50(10^{-6})$\\
 					\bottomrule
 				\end{tabular}
 			\end{minipage}
+			dalla lettura dei dati si ci accorge che $\omega_{a}$ \'e molto simile a $\omega_{f}$ e $\omega_{b}$ a $\omega_{c}$, ci\'o \'e previsto dalla teoria.
+	\section{Conclusione}
+		
+
 
 \end{document}
