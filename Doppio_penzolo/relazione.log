@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.22)  4 APR 2017 14:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.22)  4 APR 2017 16:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -406,7 +406,7 @@ Here is how much of TeX's memory you used:
  8169 multiletter control sequences out of 15000+600000
  14579 words of font info for 39 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,12n,24p,798b,214s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,13n,24p,798b,214s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/cm-super
 /cm-super-t1.enc}</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
@@ -422,7 +422,7 @@ b></usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb>
 usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></us
 r/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/
 local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb>
-Output written on relazione.pdf (3 pages, 505265 bytes).
+Output written on relazione.pdf (3 pages, 503648 bytes).
 PDF statistics:
  80 PDF objects out of 1000 (max. 8388607)
  52 compressed objects within 1 object stream
