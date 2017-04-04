@@ -8,15 +8,13 @@
 \usepackage{amsmath}
 \usepackage{mathtools}
 \usepackage{booktabs}
-%\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
-%\DeclarePairedDelimiter{\norma}{\lVert}{\rVert}
 \author{Francesco Tarantelli, Francesco Sacco, Giovanni Sucamelo}
 \title{Oscillazioni accoppiate}
 
 \begin{document}
-
 	\maketitle
-
+	\section{Scopo dell'esperienza}
+		lo scopo di questa esperienza \'e lo studi del moto di due pendoli accoppiati e, in particolare, del fenomeno dei battimenti
 
 
 	\section{Cenni Teorici}
@@ -32,16 +30,16 @@
 	\subsection{Oscillazioni in fase e in controfase}
 		Nelle oscillazioni in fase e in controfase si \'e in sostanza verificato l'equazione del moto dei pendoli nei due modi normali ottenuti dal sistema per un pendolo semplice:
 
-		\[
+		\begin{equation}
 			\begin{cases} 
 				m x''_1=-\frac{mg}{l}x_1 + k(x_2-x_1) -\frac{m}{\tau} x'_1 \\
 				m x''_2=-\frac{mg}{l}x_2 -  k(x_2-x_1) - \frac{m}{\tau} x'_2
 			\end{cases}
-		\]
+		\end{equation}
 
 		che equivale a:
 
-		\[
+		\begin{equation}
 			\begin{bmatrix}
 				m & 0 \\
 				0 & m
@@ -57,7 +55,7 @@
 				0 & \frac{m}{\tau} 
 			\end{bmatrix}
 			\mathbf{q'} 
-		\]
+		\end{equation}
 
 		dove q=$
 		\begin{bmatrix}
@@ -71,6 +69,28 @@
 		\end{equation}
 		in particolare trascurando l'attrito, $\omega_1$ e $\omega_2$ sono uguali alle pulsioni angolari dei modi normali\\($\omega_{fase}^2=\frac{g}{l} \omega_{contro}^2=\frac{g}{l}+2\frac{k}{m} $). L'equazione \ref{eq1} \'e molto importante perch\'e viene utilizzata per descrivere i battimenti.
 
+	\section{Apparato sperimentale}
+		\begin{itemize}
+			\item Due pendoli
+			\item Molla
+			\item Due smorzatori
+			\item Sistema di acquisizione
+		\end{itemize}
 
+	\section{Analisi dati}
+		Per prima misurazione abbiamo analizzato il moto di un pendolo con galleggiante per trovare la costante di smorzamento $\tau$
+	\begin{minipage}{0.5\textwidth}
+		\includegraphics[width=\textwidth]{fit_smorzato}
+		\end{minipage}
+	\begin{minipage}{0.5\textwidth}
+		\begin{tabular}{ll}
+			\toprule
+			Dati & Parametri ottimali \\
+			\midrule
+			$\tau$ & 29,94 $\pm$ 0,037
+			\bottomrule
+
+		\end{tabular}
+	\end{minipage}
 
 \end{document}

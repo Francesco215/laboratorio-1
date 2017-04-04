@@ -40,7 +40,15 @@ def fAccoppiato(tempo,ampiezza,omega1,omega2,phi1,phi2,C,decadimento):
 	#coseno2=tempo*(omega1-omega2)/2
 	return np.exp(-tempo/decadimento)*2*ampiezza*np.cos(tempo*omega1+phi1)*np.cos(tempo*omega2+phi2)+C
 #e la vettorizzo
+
+#fit coso smorzato
 vfAccoppiato=np.vectorize(fAccoppiato)
+smoP0=np.array([30,0.015,3.15,6.28/0.75,0.03])
+datismo,varismo=curve_fit(fSmorzato,lettura(dati[1][1],0),lettura(dati[1][1],1),smoP0,maxfev=50000)
+print('questi sono i dati del pendolo smorzato',datismo,varismo.diagonal())
+pylab.plot(lettura(dati[1][1],0)-lettura(dati[1][1],0)[0],lettura(dati[1][1],1)-datismo[4],'.')
+x=np.linspace(0,40,1000)
+y=vSmorzato(x,*datismo)-datismo[4]
 
 #fit dei battimenti e chi^2 dei battimenti
 battP0=np.array([0.07,6.28/0.75,6.28/40,0,0,0,30])
@@ -52,7 +60,7 @@ battDof=len(lettura(dati[4][3],2)-len(datiBattimenti))
 battPvalue=stats.chi2.pdf(battChi2,battDof)
 #y=vfAccoppiato(x,*datiBattimenti)
 
-print('questi sono i dati dei battimenti',datiBattimenti,varBattimenti)
+print('questi sono i dati dei battimenti',datiBattimenti,varBattimenti.diagonal())
 
 #fit delle oscillazioni in fase
 faseP0=np.array([30,0.015,3.15,6.28/0.75,0.03])
@@ -60,7 +68,7 @@ datiFase,varFase=curve_fit(fSmorzato,lettura(dati[2][1],2)-lettura(dati[2][1],2)
 #pylab.plot(lettura(dati[2][1],2)-lettura(dati[2][1],2)[0],lettura(dati[2][1],3),'.')
 #x=np.linspace(0,30,1000)
 #y=vSmorzato(x,*datiFase)
-print('questi sono i dati dei pendoli in fase',datiFase,varFase)
+print('questi sono i dati dei pendoli in fase',datiFase,varFase.diagonal())
 
 #fit delle oscillazioni in controfase
 tempi=lettura(dati[3][0],0)
@@ -68,10 +76,10 @@ posizioni=lettura(dati[3][0],1)
 #fit delle oscillazioni in controfase
 confaseP0=np.array([60,0.007,6,6.28/0.7,0.03])
 datiConFase,varConFase=curve_fit(fSmorzato,tempi-tempi[0],posizioni,confaseP0,maxfev=10000)
-pylab.plot(tempi-tempi[0],posizioni,'.')
-x=np.linspace(0,21.5,1000)
-y=vSmorzato(x,*datiConFase)
-print('questi sono i dati dei pendoli in contro-fase',datiConFase,varConFase)
+#pylab.plot(tempi-tempi[0],posizioni,'.')
+#x=np.linspace(0,21.5,1000)
+#y=vSmorzato(x,*datiConFase)
+print('questi sono i dati dei pendoli in contro-fase',datiConFase,varConFase.diagonal())
 
 pylab.xlabel("t[s]")
 pylab.ylabel("d[m]")
