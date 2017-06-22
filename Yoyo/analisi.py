@@ -16,23 +16,24 @@ lettura=[np.loadtxt(dati[0],unpack='true'),np.loadtxt(dati[1],unpack='true'),np.
 #faccio tutto quello che c'è da fare nel caso in cui la ruota è libera
 def fRuotaLibera(tempo,omega0,tau,mInerzia):
 	return omega0-(tempo*tau)/mInerzia
+"""
 datiRuotaLibera,varRuotaLibera=curve_fit(fRuotaLibera,lettura[0][0],lettura[0][1])
 
-#pylab.plot(lettura[0][0],lettura[0][1])
-#print(datiRuotaLibera)
-#x=np.linspace(0,100,200)
-#y=fRuotaLibera(x,*datiRuotaLibera)
-#pylab.plot(x,y)
-#pylab.title("Ruota libera")
-
+pylab.plot(lettura[0][0],lettura[0][1])
+print(datiRuotaLibera)
+x=np.linspace(0,100,200)
+y=fRuotaLibera(x,*datiRuotaLibera)
+pylab.plot(x,y)
+pylab.title("Ruota libera")
+"""
 
 #adesso si fa le oscillazioni normali
 #creo l'equazione che descrive il moto dell'oggetto quande sale e quando scende
-def fYoyoSu(tempo,omega0,tau,mInerzia):
-	return tempo*((massa_piattello[0]+masse[1])*g*raggio_pesetto[0]-tau)/(mInerzia+masse[1]*raggio_pesetto[0]^2)+omega0
+def YoyoSu(tempo,omega0,tau,mInerzia):
+	return tempo*((massa_piattello[0]+masse[1])*g*raggio_pesetto[0]-tau)/(mInerzia+masse[1]*raggio_pesetto[0]**2)+omega0
 
-def fYoyoGiu(tempo,omega0,tau,mInerzia):
-	return -tempo*((massa_piattello[0]+masse[1])*g*raggio_pesetto[0]+tau)/(mInerzia+masse[1]*raggio_pesetto[0]^2)+omega0
+def YoyoGiu(tempo,omega0,tau,mInerzia):
+	return -tempo*((massa_piattello[0]+masse[1])*g*raggio_pesetto[0]+tau)/(mInerzia+masse[1]*raggio_pesetto[0]**2)+omega0
 
 
 #creo una funzione che trova i massimi e i minimi
@@ -50,6 +51,7 @@ def RicercaMaxMin(lista):
 
 #mi creo una funzione che mi trova l'accelerazione
 #prende in input la stessa cose della RicercaMaxMin
+'''
 def accelerazione(lista):
 	accelerazione=([])
 	for i in range (1,len(lista[0])):
@@ -57,14 +59,33 @@ def accelerazione(lista):
 		accelerazione=np.insert(accelerazione,len(accelerazione),a)
 	return accelerazione
 
+  plot temporaneo dell'accelerazione
+pylab.title("accelerazione")
+pylab.plot(lettura[1][0][1:],accelerazione(lettura[1]))
+pylab.ylabel("accelerazione angolare [rad/s^2]")
+'''
+
+#e ora faccio un mucchio di fit
 def fit(lista):
 	massimi,minimi=RicercaMaxMin(lista)
-	for i in range (0,len(massimi)+len(minimi)):
+	pylab.plot(lista[0],lista[1])
+	a=0
+	b=0
+	oscillazioni=([])
+	while a<len(massimi) and b<len(minimi):
+		if massimi[a]<minimi[b]:
+			fit,varFit=curve_fit(YoyoGiu,lista[0][massimi[a]:minimi[b]+1],lista[1][massimi[a]:minimi[b]+1])
+			x=np.linspace(lista[0][massimi[a]],lista[0][minimi[b]],100)
+			y=YoyoGiu(x,*fit)
+			b=b+1
+		else:
+			fit,varFit=curve_fit(YoyoSu,lista[0][minimi[b]:massimi[a]+1],lista[1][minimi[b]:massimi[a]+1])
+			x=np.linspace(lista[0][minimi[b]],lista[0][massimi[a]],100)
+			y=YoyoSu(x,*fit)
+			a=a+1
+		pylab.plot(x,y)
 
-
-
-
-
+fit(lettura[1])
 
 
 
