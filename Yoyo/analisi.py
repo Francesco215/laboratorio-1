@@ -68,24 +68,27 @@ pylab.ylabel("accelerazione angolare [rad/s^2]")
 #e ora faccio un mucchio di fit
 def fit(lista):
 	massimi,minimi=RicercaMaxMin(lista)
-	pylab.plot(lista[0],lista[1])g
+	pylab.plot(lista[0],lista[1])
 	a=0
 	b=0
-	oscillazioni=([])
 	while a<len(massimi) and b<len(minimi):
 		if massimi[a]<minimi[b]:
 			fit,varFit=curve_fit(YoyoGiu,lista[0][massimi[a]:minimi[b]+1],lista[1][massimi[a]:minimi[b]+1])
 			x=np.linspace(lista[0][massimi[a]],lista[0][minimi[b]],100)
 			y=YoyoGiu(x,*fit)
-			b=b+1
+			a=a+1
 		else:
 			fit,varFit=curve_fit(YoyoSu,lista[0][minimi[b]:massimi[a]+1],lista[1][minimi[b]:massimi[a]+1])
 			x=np.linspace(lista[0][minimi[b]],lista[0][massimi[a]],100)
 			y=YoyoSu(x,*fit)
-			a=a+1
+			b=b+1
 		pylab.plot(x,y)
 
 fit(lettura[1])
+
+
+
+
 
 
 
