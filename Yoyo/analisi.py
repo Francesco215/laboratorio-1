@@ -22,7 +22,10 @@ raggio_pesetto=np.array([0.02006,0.000005])
 raggio_cerchio=np.array([0.16,0.0000075])
 g=9.81
 nummero=2
-taglio=2
+taglio=0
+mInerzia=3.146*10**6
+
+errore=0.04
 
 #lettura[m][n][l] indica m=il file, se n=0 il tempo, ne n=1 omega, l indica l'essesimo elemento della lista
 lettura=[]
@@ -30,25 +33,29 @@ for i in range (0,len(dati)):
 	estrazione=np.loadtxt(dati[i],unpack='true')
 	lettura.append(estrazione)
 
+
 #faccio tutto quello che c'è da fare nel caso in cui la ruota è libera
-def fRuotaLibera(tempo,omega0,tau,mInerzia):
+def fRuotaLibera(tempo,omega0,tau):
 	return omega0-(tempo*tau)/mInerzia
 
 datiRuotaLibera,varRuotaLibera=curve_fit(fRuotaLibera,lettura[0][0],lettura[0][1])
-"""
+
 pylab.plot(lettura[0][0],lettura[0][1])
-print(datiRuotaLibera)
+print(datiRuotaLibera,varRuotaLibera.diagonal())
 x=np.linspace(0,100,200)
 y=fRuotaLibera(x,*datiRuotaLibera)
 pylab.plot(x,y)
 pylab.title("Ruota libera")
-"""
+pylab.ylabel("ω[rad/s]")
+pylab.xlabel("t[s]")
+pylab.show()
+
 #adesso si fa le oscillazioni normali
 #creo l'equazione che descrive il moto dell'oggetto quande sale e quando scende
-def YoyoSu(tempo,omega0,tau,mInerzia):
+def YoyoSu(tempo,omega0,tau):
 	return tempo*((massa_piattello[0]+masse[nummero])*g*raggio_pesetto[0]-tau)/(mInerzia+masse[nummero]*raggio_pesetto[0]**2)+omega0
 
-def YoyoGiu(tempo,omega0,tau,mInerzia):
+def YoyoGiu(tempo,omega0,tau):
 	return -tempo*((massa_piattello[0]+masse[nummero])*g*raggio_pesetto[0]+tau)/(mInerzia+masse[nummero]*raggio_pesetto[0]**2)+omega0
 
 
@@ -65,51 +72,37 @@ def RicercaMaxMin(lista):
 	return massimi,minimi
 
 
-#mi creo una funzione che mi trova l'accelerazione
-#prende in input la stessa cose della RicercaMaxMin
-'''
-def accelerazione(lista):
-	accelerazione=([])
-	for i in range (1,len(lista[0])):
-		a=(lista[1][i-1]-lista[1][i])/(lista[0][i-1]-lista[0][i])
-		accelerazione=np.insert(accelerazione,len(accelerazione),a)
-	return accelerazione
-
-  plot temporaneo dell'accelerazione
-pylab.title("accelerazione")
-pylab.plot(lettura[1][0][1:],accelerazione(lettura[1]))
-pylab.ylabel("accelerazione angolare [rad/s^2]")
-'''
-
 #e ora faccio un mucchio di fit
 def fit(lista):
 	massimi,minimi=RicercaMaxMin(lista)
 	pylab.plot(lista[0],lista[1],'-',color='grey',lw=2)
 	a=0
 	b=0
+	chi2=0
 	while a<len(massimi)-taglio and b<len(minimi)-taglio:
 		if massimi[a]<minimi[b]:
 			fit,varFit=curve_fit(YoyoGiu,lista[0][massimi[a]:minimi[b]+1],lista[1][massimi[a]:minimi[b]+1])
+			achi2=(((lista[1][massimi[a]:minimi[b]+1]-YoyoGiu(lista[0][massimi[a]:minimi[b]+1],*fit))/errore)**2).sum()
+			chi2=chi2+achi2
 			x=np.linspace(lista[0][massimi[a]],lista[0][minimi[b]],100)
 			y=YoyoGiu(x,*fit)
 			a=a+1
 		else:
 			fit,varFit=curve_fit(YoyoSu,lista[0][minimi[b]:massimi[a]+1],lista[1][minimi[b]:massimi[a]+1])
+			achi2=(((lista[1][massimi[a]:minimi[b]+1]-YoyoSu(lista[0][massimi[a]:minimi[b]+1],*fit))/errore)**2).sum()
+			chi2=chi2+achi2
 			x=np.linspace(lista[0][minimi[b]],lista[0][massimi[a]],100)
 			y=YoyoSu(x,*fit)
 			b=b+1
 		pylab.plot(x,y,'--',color='black',lw=3)
 		if a+b==1:
-			print("parametri di fit",fit,"diagonale covarianza",varFit.diagonal())
-
-fit(lettura[nummero])
-
-
-
+			print("\n\nparametri di fit",fit)
+			print("\n\ndiagonale covarianza",varFit.diagonal(),"\n\n")
+	print("\n\nil chi^2 è",chi2,"\ne il numero di misurazioni è",len(lettura[0]),"\n\n")
+print(fit(lettura[nummero]))
 
 
-
-
+pylab.title("Oscillazione volano")
 pylab.ylabel("ω[rad/s]")
 pylab.xlabel("t[s]")
 pylab.show()
