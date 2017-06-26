@@ -15,6 +15,7 @@ import numpy as np
 import matplotlib
 import pylab
 from scipy.optimize import curve_fit
+from scipy import stats
 dati=['dati/ruota_libera.txt','dati/150.txt','dati/300.txt','dati/400.txt']
 massa_piattello=np.array([0.023011,0.000001])
 masse=([0,0.15,0.3,0.5])
@@ -25,7 +26,7 @@ nummero=2
 taglio=0
 mInerzia=3.146*10**6
 
-errore=0.04
+errore=0.05
 
 #lettura[m][n][l] indica m=il file, se n=0 il tempo, ne n=1 omega, l indica l'essesimo elemento della lista
 lettura=[]
@@ -39,6 +40,10 @@ def fRuotaLibera(tempo,omega0,tau):
 	return omega0-(tempo*tau)/mInerzia
 
 datiRuotaLibera,varRuotaLibera=curve_fit(fRuotaLibera,lettura[0][0],lettura[0][1])
+
+chi2libero=(((lettura[0][1]-fRuotaLibera(lettura[0][0],*datiRuotaLibera))/errore)**2).sum()
+print("\n\nil chi^2 della ruota libera è",chi2libero,"\ne il numero di misurazioni è",len(lettura[0][0]))
+print("\nil pvalue è",stats.chi2.cdf(chi2libero,len(lettura[0][0])),"\n\n")
 
 pylab.plot(lettura[0][0],lettura[0][1])
 print(datiRuotaLibera,varRuotaLibera.diagonal())
@@ -95,12 +100,14 @@ def fit(lista):
 			y=YoyoSu(x,*fit)
 			b=b+1
 		pylab.plot(x,y,'--',color='black',lw=3)
-		if a+b==1:
-			print("\n\nparametri di fit",fit)
-			print("\n\ndiagonale covarianza",varFit.diagonal(),"\n\n")
-	print("\n\nil chi^2 è",chi2,"\ne il numero di misurazioni è",len(lettura[0]),"\n\n")
-print(fit(lettura[nummero]))
+		if a+b<3:
+			print("\n\nomega0, tau",fit)
+			print("\nerrori",varFit.diagonal(),"\n\n")
+	print("\n\nil chi^2 è",chi2,"\ne il numero di misurazioni è",len(lista[1]))
+	print("\nil pvalue è",stats.chi2.cdf(chi2,len(lista[1])))
 
+
+fit(lettura[nummero])
 
 pylab.title("Oscillazione volano")
 pylab.ylabel("ω[rad/s]")
