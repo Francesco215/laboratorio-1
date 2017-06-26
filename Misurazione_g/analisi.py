@@ -23,39 +23,37 @@ tempi=([[7.53,7.57,7.59,7.58,7.55,7.63,7.63,7.55,7.56],
 		[10.66,10.60,10.57,10.47,10.65,10.65,10.53,10.5,10.69,10.4]])
 #divido i tempi in 10 per trovare 10 periodi
 periodi=([])
-DevPeriodi=([])
+devPeriodi=([])
 for i in range (0,len(tempi)):
 	media=np.mean(tempi[i])/10
 	std=np.std(tempi[i])/10
 	periodi=np.insert(periodi,len(periodi),media)
-	DevPeriodi=np.insert(DevPeriodi,len(DevPeriodi),std)
-def fitPeriodi(m,k):
-	return ((m+massaMolla/3000)*(2*np.pi**2))/k
+	devPeriodi=np.insert(devPeriodi,len(devPeriodi),std)
 
-fitT,varT=curve_fit(fitPeriodi,masse,periodi)
+def Periodo(m,k,k0):
+	T2=4*np.pi**2*(m/k)+k0
+	return T2
 
-print("\n\n",fitT,varT,"\n\n")
+k,sk=curve_fit(Periodo,masse,periodi**2,sigma=devPeriodi)
+print("\n\nk=",k[0],"+-",sk[0][0],"\n\n")
 
-x=np.linspace(0.025,masse[3]+0.005,100)
-y=fitPeriodi(x,fitT[0])
-pylab.errorbar(masse,periodi**2,yerr=DevPeriodi,fmt='.')
+pylab.errorbar(masse,periodi**2,yerr=devPeriodi,fmt='.')
+x=np.linspace(masse[0]-0.003,masse[len(masse)-1]+0.003,100)
+y=Periodo(x,*k)
+pylab.title("Stima di k")
+pylab.xlabel("m[kg]")
+pylab.ylabel("t^2[s^2]")
 pylab.plot(x,y)
-#pylab.xlim(18,52)
-#pylab.ylim(0.5,1.2)
-pylab.title("Periodi in funzione della massa")
-pylab.xlabel("m[Kg]")
-pylab.ylabel("T^2[s^2]")
 pylab.show()
-"""
 
-def Allungamento(m,g):
-	return g*m/fitT
+def fitG(m,a):
+	return m*a
+popt,mammt=curve_fit(fitG,masse,allungamenti,sigma=0.0015)
 
-mediaG,varG=curve_fit(Allungamento,masse,allungamenti)
-pylab.plot(masse,allungamenti)
-x=np.linspace(0.025,0.05,100)
-y=Allungamento(x,*mediaG)
+print(popt,mammt)
+x=np.linspace(masse[0]-0.003,masse[len(masse)-1]+0.003,100)
+y=fitG(x,*popt)
 pylab.plot(x,y)
-print(mediaG,varG)
+pylab.errorbar(masse,allungamenti,yerr=0.0015)
+
 pylab.show()
-"""
