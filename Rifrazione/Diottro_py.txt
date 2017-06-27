@@ -1,0 +1,107 @@
+import numpy
+import pylab as lab
+from scipy.odr import odrpack
+from scipy.optimize import curve_fit as fit
+from scipy import stats
+
+
+
+mis=numpy.loadtxt('Misure1.txt', unpack=True)
+mis[2]=mis[2]/mis[0]**2.
+mis[3]=mis[3]/mis[1]**2.
+mis[0]=1./mis[0] 
+mis[1]=1./mis[1] 
+
+
+
+def F(p  , x):
+    s=p[0]*x +p[1]
+    return s
+
+model=odrpack.Model(F)
+data = odrpack.RealData(mis[1], mis[0], sx=mis[3], sy=mis[2])
+odr = odrpack.ODR(data, model, beta0=(-1.33,0.05))
+out = odr.run()
+popt, pcov = out.beta, out.cov_beta
+m,q= popt
+dm,dq = numpy.sqrt(pcov.diagonal())
+chi2 = out.sum_square
+print('n = %.3f +/- %.3f \nq=%.3f +/- %.3f' % (-m,dm,q,dq))
+print('Chisquare = %.1f' % chi2)
+print(popt)
+
+
+
+
+"""
+def F( x,a,b ):
+    s=0.
+    s=a*x+b
+    return s
+
+popt, pcov = fit( F, mis[ 1], mis[ 0], numpy.array ([-1.,1.])) 
+m,q= popt
+dm,dq = numpy.sqrt(pcov.diagonal())
+print('n = %.3f +/- %.3f \nR=%.3f ' % (-m,dm,(-1-m)/q))
+"""
+
+#Fo=numpy.vectorize( F )
+
+Fteorici= F(popt,mis[1 ] )
+
+#print( Fteorici )
+
+x=numpy.linspace( 1./65  , 1./35   , 10000   )
+lab.xlabel('    1/p  [1/cm ]')
+lab.ylabel('  1/q    [1/cm ]')
+lab.grid( color= 'gray' )
+
+lab.figure(1)
+lab.title('Legge di Gauss del diottro sferico')
+lab.axis([  1./ 65  ,1./35 , 1./70  , 1./30  ])	
+lab.errorbar( mis[1 ], mis[0 ],  mis[2 ],mis[3], fmt='o' )                        
+lab.plot( x, F( popt,x )) #, x, Fo( x,   +     ), x, Fo( x,   -     )                               
+#lab.savefig( 'figura1.pdf' )
+
+lab.figure(2)
+lab.title('Residui')
+lab.axis([  1./ 65  ,1./35 , -1./325  , 1./325 ])	
+lab.errorbar( mis[ 1], mis[0 ] - Fteorici, mis[2 ],mis[3], fmt='o' )              
+lab.plot( x, 0*x )
+
+#lab.savefig( 'figura2.pdf' )
+lab.show()		
+
+#--------------------------------------------------------------------------------
+
+
+
+
+
+
+dof = len( mis[ 1] ) - len( popt )
+
+result = 1 - stats.chi2.cdf ( chi2 , dof )
+
+if result > 0.5:
+   print('p-value= %.3f ' % (100-100*result) )
+else:
+   print('p-value= %.3f ' % (100*result) )
+
+print('Chisquare atteso: %.1f +/- %.1f' %( dof , numpy.sqrt(4/5*dof)  ))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				

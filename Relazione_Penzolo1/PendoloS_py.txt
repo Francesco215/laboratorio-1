@@ -1,0 +1,329 @@
+import numpy
+import pylab as lab
+from scipy.odr import odrpack
+from scipy.optimize import curve_fit as fit
+from scipy import stats
+
+
+
+
+
+
+#Attenzione nel 3 punto ci servira' un array per l
+#inoltre theta non sara' piu' un array
+l=
+dl=
+g=9.807
+
+
+
+def s(l):
+    n=m=s=0.
+    for i in l:
+        n += 1
+        delta= i-m
+        m += delta/n
+        s += (i-m)*delta
+    s /= n*(n-1)
+    return m, numpy.sqrt(s)
+
+
+
+x=numpy.linspace(  0.001  , 1000   , 1000000   )
+
+
+
+
+
+#Dipendenza periodo dalla massa con ampiezza e lunghezza fissate
+
+print('Dipendenza periodo dalla massa con ampiezza e lunghezza fissate\n')
+
+
+mis=numpy.loadtxt('Misure1.txt', unpack=True)
+
+
+m=numpy.array([ , , ])
+dm=numpy.array([dl]*len(m))
+
+
+Tdsm=numpy.array([0.]*(len(m)))
+Tmed=numpy.array([0.]*(len(m)))
+
+
+
+for i in range (0,len(m)):
+    Tmed[i],Tdsm[i]=s(mis[i])
+
+
+
+
+def F( m, q):
+    s=0.
+    s=q
+    return s
+
+popt, pcov = fit( F, m, Tmed, 2.*numpy.pi*numpy.sqrt(l/g), sigma=Tdsm ) 
+q= popt
+dq = numpy.sqrt(pcov.diagonal())
+print('q=%.3f +/- %.3f' % (q,dq))
+
+chi2 = ( ( ( Tmed - F( m , q ) ) / Tdsm )**2. ).sum ()
+
+print('Chisquare1 = %.1f' % chi2)
+
+
+
+dof = len( m ) - len( popt )
+
+result = 1 - stats.chi2.cdf ( chi2 , dof )
+
+if result > 0.5:
+   print('p-value1= %.3f ' % (100-100*result) )
+else:
+   print('p-value1= %.3f ' % (100*result) )
+
+print('Chisquare atteso1: %.f +/- %.f\n' %( dof , numpy.sqrt(4./5.*dof)))
+
+
+
+lab.grid( color= 'gray' )
+lab.xlabel('Massa[g]')
+lab.ylabel(' Periodo [s]')
+
+
+#GRAFICO
+
+lab.figure(1)
+#lab.axis([   ,   ,   ,   ])	
+lab.errorbar( m , Tmed, Tdsm, dm, fmt='o' )    
+#[in lab.errorbar ] prima errori sulla y e poi sulla x.       
+lab.plot( x,numpy.array([ F(x,q) ]*len(x) ) )             
+
+
+
+lab.savefig( 'figura1.pdf' )
+
+
+
+
+
+
+
+#Dipendenza del periodo dall'ampiezza con massa e lunghezza fissate
+
+print('Dipendenza del periodo dall ampiezza con massa e lunghezza fissate\n')
+
+mis=numpy.loadtxt('Misure2.txt', unpack=True)
+
+
+cat=numpy.array([, , , , ,])
+
+theta=numpy.array([0.]*(len(cat)))
+dtheta=numpy.array([0.]*(len(cat)))
+
+theta= numpy.arcsin( cat / l )
+dtheta=1./numpy.sqrt(1.- cat**2. / l**2.)*cat/l*(dl/l + dl/cat)
+
+
+
+
+
+Tdsm=numpy.array([0.]*(len(theta)))
+Tmed=numpy.array([0.]*(len(theta)))
+
+
+
+for i in range (0,len(theta)):
+    Tmed[i],Tdsm[i]=s(mis[i])
+
+
+
+
+
+def T(p, theta):
+    return 2.*numpy.pi*numpy.sqrt(p[0]/g)*(1.+p[1]*theta**2.)
+
+
+
+model=odrpack.Model(T)
+data = odrpack.RealData(theta, Tmed, dtheta , Tdsm)
+odr = odrpack.ODR(data, model, beta0=(l,1./16))
+out = odr.run()
+popt, pcov = out.beta, out.cov_beta
+l2,c= popt
+dl2,dc = numpy.sqrt(pcov.diagonal())
+chi2 = out.sum_square
+print('l2 = %.3f +/- %.3f \nc=%.3f +/- %.3f' % (l2,dl2,c,dc))
+print('Chisquare2 = %.1f' % chi2)
+
+
+
+
+dof = len( theta ) - len( popt )
+
+result = 1 - stats.chi2.cdf ( chi2 , dof )
+
+if result > 0.5:
+   print('p-value2= %.3f ' % (100-100*result) )
+else:
+   print('p-value2= %.3f ' % (100*result) )
+
+print('Chisquare atteso2: %.f +/- %.f\n' %( dof , numpy.sqrt(4./5.*dof)))
+
+
+
+lab.grid( color= 'gray' )
+lab.xlabel('Angolo[rad]')
+lab.ylabel(' Periodo [s]')
+
+
+#GRAFICO
+
+lab.figure(2)
+lab.axis([ theta[0]  ,theta[len(theta)-1]   , 2  ,2.5 ])	
+lab.errorbar( theta , Tmed, Tdsm, dtheta, fmt='o' )    
+#[in lab.errorbar ] prima errori sulla y e poi sulla x.       
+lab.plot( x, T( popt , x  ))             
+
+lab.savefig( 'figura2.pdf' )
+
+#RESIDUI
+
+lab.figure(3)
+lab.axis([ theta[0]  ,theta[len(theta)-1]   , -0.1 , 0.1  ])
+lab.errorbar( theta  , Tmed - T(popt, theta ), Tdsm, dtheta, fmt='o' )
+lab.plot( x, 0*x )
+
+
+
+lab.savefig( 'figura3.pdf' )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Dipendenza del periodo dalla lunghezza con massa e ampiezza fissate
+
+print('Dipendenza del periodo dalla lunghezza con massa e ampiezza fissate\n')
+
+
+mis=numpy.loadtxt('Misure3.txt', unpack=True)
+
+
+
+l=numpy.array([])
+dl=numpy.array([ . ]*len(l))
+theta_0=
+
+
+Tdsm=numpy.array([0.]*(len(l)))
+Tmed=numpy.array([0.]*(len(l)))
+
+
+
+for i in range (0,len(l)):
+    Tmed[i],Tdsm[i]=s(mis[i])
+
+
+
+
+
+def T(p, l):
+    return p[0]*numpy.sqrt(l/p[1])
+
+
+
+model=odrpack.Model(T)
+data = odrpack.RealData(l, Tmed, dl , Tdsm)
+odr = odrpack.ODR(data, model, beta0=(2.*numpy.pi, g))
+out = odr.run()
+popt, pcov = out.beta, out.cov_beta
+c2,g2= popt
+dc2,dg2 = numpy.sqrt(pcov.diagonal())
+chi2 = out.sum_square
+print('c2 = %.3f +/- %.3f \ng2=%.3f +/- %.3f' % (c2,dc2,g2,dg2))
+print('Chisquare3 = %.1f' % chi2)
+
+
+
+
+
+"""
+def T( lo, co,go):
+    return co*numpy.sqrt(lo/go)
+
+popt, pcov = fit( T, l, Tmed, numpy.array([2.*numpy.pi, g]), sigma=Tdsm ) 
+c2,g2= popt
+dc2,dg2 = numpy.sqrt(pcov.diagonal())
+print('c2 = %.3f +/- %.3f \ng2=%.3f +/- %.3f' % (c2,dc2,g2,dg2))
+
+chi2 = ( ( ( Tmed - T( l,c2,g2 ) ) / Tdsm )**2. ).sum ()
+
+print('Chisquare3 = %.1f' % chi2)
+
+"""
+
+
+
+
+
+
+
+
+
+
+dof = len( l ) - len( popt )
+
+result = 1 - stats.chi2.cdf ( chi2 , dof )
+
+if result > 0.5:
+   print('p-value3= %.3f ' % (100-100*result) )
+else:
+   print('p-value3= %.3f ' % (100*result) )
+
+print('Chisquare atteso3: %.f +/- %.f' %( dof , numpy.sqrt(4./5.*dof)))
+
+
+
+
+lab.grid( color= 'gray' )
+lab.xlabel('Lunghezza[m]')
+lab.ylabel(' Periodo [s]')
+
+
+#GRAFICO
+
+lab.figure(4)
+lab.axis([ l[0]  , l[len(l)-1]  , 1.5  , 3  ])	
+lab.errorbar( l , Tmed, Tdsm, dl  , fmt='o' )    
+#[in lab.errorbar ] prima errori sulla y e poi sulla x.       
+lab.plot( x, T(popt,x))      #lab.plot( x, T(x,*popt))        
+
+lab.savefig( 'figura4.pdf' )
+
+#RESIDUI
+
+lab.figure(5)
+lab.axis([ l[0]  , l[len(l)-1]  , -0.1 , 0.1  ])
+lab.errorbar(l, Tmed - T(popt,l), Tdsm,  dl  , fmt='o' )
+lab.plot( x, 0*x )
+#lab.errorbar(l, Tmed - T(l,*popt), Tdsm,  dl  , fmt='o' )
+
+
+lab.savefig( 'figura5.pdf' )
+lab.show()		
+

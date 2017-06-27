@@ -7,13 +7,13 @@ from scipy.optimize import curve_fit
 g=9.807
 massaPiattello=7.87
 massaMolla=3.08
-masseg=([19.95,29.9,39.85,50.01])
+masseg=np.array([19.95,29.9,39.85,50.01])
 #sistemo la faccenda portando in kg
-masse=([])#in kg
+masse=np.array([])#in kg
 for i in range (0,len(masseg)):
 	a=((masseg[i]+massaPiattello)/1000)
 	masse=np.insert(masse,len(masse),a)
-allungamenti=([0.088,0.134,0.182,0.227])#in metri
+allungamenti=np.array([0.088,0.134,0.182,0.227])#in metri
 
 
 #tempi di 10 oscillazioni
@@ -35,7 +35,7 @@ def Periodo(m,k,k0):
 	return T2
 
 k,sk=curve_fit(Periodo,masse,periodi**2,sigma=devPeriodi)
-print("\n\nk=",k[0],"+-",sk[0][0],"\n\n")
+print("\n\nk=",k[0],"+-",sk[0][0])
 
 pylab.errorbar(masse,periodi**2,yerr=devPeriodi,fmt='.')
 x=np.linspace(masse[0]-0.003,masse[len(masse)-1]+0.003,100)
@@ -46,14 +46,16 @@ pylab.ylabel("t^2[s^2]")
 pylab.plot(x,y)
 pylab.show()
 
-def fitG(m,a):
-	return m*a
-popt,mammt=curve_fit(fitG,masse,allungamenti,sigma=0.0015)
+def fitG(m,a,p0):
+	return p0 + m*a
+popt,mammt=curve_fit(fitG,masse,allungamenti)
 
-print(popt,mammt)
+print('\n\nk/g=',popt[0],"+-",mammt[0][0],"\n\n")
 x=np.linspace(masse[0]-0.003,masse[len(masse)-1]+0.003,100)
 y=fitG(x,*popt)
 pylab.plot(x,y)
-pylab.errorbar(masse,allungamenti,yerr=0.0015)
-
+pylab.errorbar(masse,allungamenti,yerr=0.0015,fmt='.')
+pylab.title("Grafico che mostra l'allungamento in funzione delle masse")
+pylab.xlabel("m[kg]")
+pylab.ylabel("∆l[m]")
 pylab.show()

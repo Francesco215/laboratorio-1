@@ -22,7 +22,7 @@ masse=([0,0.15,0.3,0.5])
 raggio_pesetto=np.array([0.02006,0.000005])
 raggio_cerchio=np.array([0.16,0.0000075])
 g=9.81
-nummero=2
+nummero=3
 taglio=0
 mInerzia=3.146*10**6
 

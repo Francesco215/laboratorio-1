@@ -1,0 +1,100 @@
+import numpy
+import math
+import pylab as lab
+from scipy.odr import odrpack
+from scipy import stats
+
+mis=numpy.loadtxt('Misure.txt', unpack=True)
+
+
+def F(x,a ):
+    s=a*x
+    return s
+
+model=odrpack.Model(F)
+data = odrpack.RealData(mis[2], mis[0], sx=mis[3], sy=mis[1])
+odr = odrpack.ODR(data, model, beta0=numpy.array([1.]))
+out = odr.run()
+popt, pcov = out.beta, out.cov_beta
+m= popt
+dm = numpy.sqrt(pcov.diagonal())
+chi2 = out.sum_square
+print('m = %.3f +/- %.3f' % (m, dm))
+print('Chisquare = %.1f' % chi2)
+
+
+#--------------------------------------------------------------------------------
+
+Fo=numpy.vectorize( F )
+
+Fteorici= Fo( mis[2], m   )
+#print( Fteorici )
+
+x=numpy.linspace(  0  ,  1  , 1000   )
+lab.title('Indice di rifrazione plexiglass')
+lab.xlabel('  sen r ')
+lab.ylabel('   sen i ')
+lab.grid( color= 'gray' )
+
+#GRAFICO
+lab.title('Grafico legge di Snell')
+lab.figure(1)
+lab.axis([ 0.08  ,  0.62 , 0.1  ,  0.9 ])	
+lab.errorbar( mis[2], mis[0],  mis[1],mis[3], fmt='o' )                          
+lab.plot( x, Fo( x,  m ))                                
+
+lab.figure(2)
+lab.title('Residui')
+lab.axis([  1./ 65  ,1./35 , -1./325  , 1./325 ])	
+lab.errorbar( mis[ 2], mis[0 ] - Fteorici, mis[1 ],mis[3], fmt='o' )              
+lab.plot( x, 0*x )
+
+lab.savefig( 'figura.pdf' )
+lab.show()		
+
+#--------------------------------------------------------------------------------
+
+
+dof = len( mis[ 2] ) - len( popt )
+
+result = 1 - stats.chi2.cdf ( chi2 , dof )
+if result > 0.5:
+   print('p-value= %.2f ' % (100-100*result) )
+else:
+   print('p-value= %.2f ' % (100*result) )
+print('Chisquare atteso: %.1f +/- %.1f' %(dof,numpy.sqrt(4/5*dof)))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				
