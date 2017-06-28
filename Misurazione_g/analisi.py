@@ -7,26 +7,27 @@ from scipy.optimize import curve_fit
 g=9.807
 massaPiattello=7.87
 massaMolla=3.08
-masseg=np.array([19.95,29.9,39.85,50.01])
+masseg=np.array([19.998,30.001,39.970,50.017])
 #sistemo la faccenda portando in kg
 masse=np.array([])#in kg
 for i in range (0,len(masseg)):
 	a=((masseg[i]+massaPiattello)/1000)
 	masse=np.insert(masse,len(masse),a)
-allungamenti=np.array([0.088,0.134,0.182,0.227])#in metri
+
+allungamenti=np.array([0.076,0.114,0.15,0.186])#in metri+-1.5mm
 
 
 #tempi di 10 oscillazioni
-tempi=([[7.53,7.57,7.59,7.58,7.55,7.63,7.63,7.55,7.56],
-		[8.71,8.65,8.63,8.70,8.71,8.68,8.72,8.59,8.63],
-		[9.55,9.65,9.62,9.54,9.59,9.67,9.69,9.64,9.68,9.51],
-		[10.66,10.60,10.57,10.47,10.65,10.65,10.53,10.5,10.69,10.4]])
+tempi=([[6.85,6.88,6.83,6.83,8.80,6.72,6.87,6.77,6.73],
+		[7.99,7.88,7.96,7.87,7.76,7.76,7.71,7.80,7.89],
+		[8.74,8.70,8.75,8.75,8.63,8.74,8.72,8.63,8.73],
+		[9.53,9.50,9.53,9.59,9.57,9.51,9.50,9.57,9.49]])
 #divido i tempi in 10 per trovare 10 periodi
 periodi=([])
 devPeriodi=([])
 for i in range (0,len(tempi)):
 	media=np.mean(tempi[i])/10
-	std=np.std(tempi[i])/10
+	std=np.std(tempi[i])/(10*np.sqrt(len(tempi[i])))
 	periodi=np.insert(periodi,len(periodi),media)
 	devPeriodi=np.insert(devPeriodi,len(devPeriodi),std)
 
