@@ -5,7 +5,7 @@ from scipy import stats
 #masse stimate in grammi
 g=9.807
 massaPiattello=7.87
-massaMolla=3.08
+massaMolla=3.080
 masseg=np.array([19.998,30.001,39.970,50.017])
 #sistemo la faccenda portando in kg
 masse=np.array([])#in kg
